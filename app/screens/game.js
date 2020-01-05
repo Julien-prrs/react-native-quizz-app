@@ -8,6 +8,7 @@ export default class GameScreen extends React.Component {
     static navigationOptions = {
         header: null
     }
+
     constructor(props) {
         super(props)
 
@@ -18,6 +19,8 @@ export default class GameScreen extends React.Component {
             questionIndex: 0,
             activeQuestion: {}
         }
+
+        this._nextQuestion = this.nextQuestion.bind(this); 
     }
 
     componentDidMount() {
@@ -40,11 +43,7 @@ export default class GameScreen extends React.Component {
                 this.setState({
                     isLoading: false,
                     activeQuestion: this.questions[this.state.questionIndex]
-                })
-
-                console.log(this.questions)
-
-                // - TODO: Show first question 
+                });
             }
         }
         xhr.send();
@@ -57,6 +56,18 @@ export default class GameScreen extends React.Component {
 
     decodeQuestionData(str) {
         return decodeURIComponent(str).replace('?', ' ?')
+    }
+
+    nextQuestion() {
+        if ((this.state.questionIndex + 1) < this.questions.length) {
+            this.setState(prevState => ({
+                questionIndex: prevState.questionIndex + 1,
+                activeQuestion: this.questions[prevState.questionIndex + 1]
+            }));
+        } else {
+            console.log('GAME ENDED');
+            // - TODO: SCREEN RECAP > nb correct / nb wrong -> button play again / back to HomeScreen
+        }
     }
 
     render() {
@@ -79,7 +90,7 @@ export default class GameScreen extends React.Component {
                                     <Text style={styles.game.question}>{this.decodeQuestionData(this.state.activeQuestion.question)}</Text>
                                 </View>
                             </View>
-                            <Answers question={this.state.activeQuestion} />
+                            <Answers questionIndex={this.state.questionIndex} question={this.state.activeQuestion} next={this._nextQuestion} />
                         </View>
                 }
             </View>

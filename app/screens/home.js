@@ -13,6 +13,9 @@ import styles from '../styles'
         - Show result nbCorrect/total
         - Save data with LocalStorage (Question/Answer/CorrectValue - DateTimeBegin - DateTimeBegin/DateTimeEnd: duration)
 
+
+        
+  -- BONNUS -- 
 - TODO: Screen scores
     - List all games (NbCorrect/nbQuestion - DateTimeBegin)
 
