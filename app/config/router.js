@@ -38,6 +38,9 @@ const Router = createStackNavigator({
     },
     Game: {
         screen: views.GameScreen
+    },
+    endGame: {
+        screen: views.endGameScreen
     }
 },
 {

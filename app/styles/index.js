@@ -1,11 +1,13 @@
 import global from './global'
 import settings from './settings'
 import game from './game'
+import endgame from './endgame'
 
 const styles = {
     global,
     settings,
-    game
+    game,
+    endgame
 }
 
 export default styles

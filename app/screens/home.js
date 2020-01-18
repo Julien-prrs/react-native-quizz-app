@@ -3,29 +3,6 @@ import { StatusBar, View, Image, TouchableWithoutFeedback, Text, Animated } from
 import Icon from 'react-native-ionicons'
 import styles from '../styles'
 
-/*
-- TODO: Screen play
-    - onPressBack > modal confirm
-    - Get data from API
-    - Show line progress & index/total
-
-    - TODO: End of game
-        - Show result nbCorrect/total
-        - Save data with LocalStorage (Question/Answer/CorrectValue - DateTimeBegin - DateTimeBegin/DateTimeEnd: duration)
-
-
-        
-  -- BONNUS -- 
-- TODO: Screen scores
-    - List all games (NbCorrect/nbQuestion - DateTimeBegin)
-
-- TODO: Screen scoreSingle
-    - Show excerpt data (nbCorrect/nbQuestion, DateTimeBegin, Duration)
-    - List all questions with given answer & correct anwser
- */
-
-
-
 export default class HomeScreen extends React.Component {
     static navigationOptions = {
         header: null

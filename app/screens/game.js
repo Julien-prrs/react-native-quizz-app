@@ -14,13 +14,15 @@ export default class GameScreen extends React.Component {
 
         this.preferences = {};
         this.questions = [];
+        this.score = 0;
         this.state = {
             isLoading: true,
             questionIndex: 0,
             activeQuestion: {}
         }
 
-        this._nextQuestion = this.nextQuestion.bind(this); 
+        this._nextQuestion = this.nextQuestion.bind(this);
+        this._handleCorrectAnswer = this.handleCorrectAnswer.bind(this);
     }
 
     componentDidMount() {
@@ -58,15 +60,25 @@ export default class GameScreen extends React.Component {
         return decodeURIComponent(str).replace('?', ' ?')
     }
 
+    handleCorrectAnswer() {
+        this.score += 1;
+    }
+
     nextQuestion() {
         if ((this.state.questionIndex + 1) < this.questions.length) {
+            console.log(this.score);
             this.setState(prevState => ({
                 questionIndex: prevState.questionIndex + 1,
                 activeQuestion: this.questions[prevState.questionIndex + 1]
             }));
         } else {
-            console.log('GAME ENDED');
-            // - TODO: SCREEN RECAP > nb correct / nb wrong -> button play again / back to HomeScreen
+            console.log('END GAME');
+            console.log(this.score + '/' + this.questions.length);
+
+            this.props.navigation.navigate('endGame', {
+                score: this.score,
+                nbQuestion: this.questions.length
+            })
         }
     }
 
@@ -90,7 +102,7 @@ export default class GameScreen extends React.Component {
                                     <Text style={styles.game.question}>{this.decodeQuestionData(this.state.activeQuestion.question)}</Text>
                                 </View>
                             </View>
-                            <Answers questionIndex={this.state.questionIndex} question={this.state.activeQuestion} next={this._nextQuestion} />
+                            <Answers questionIndex={this.state.questionIndex} onAnswerIsCorrect={this._handleCorrectAnswer} question={this.state.activeQuestion} next={this._nextQuestion} />
                         </View>
                 }
             </View>

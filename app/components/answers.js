@@ -57,6 +57,10 @@ export default class Answers extends React.Component {
         if (!this.userAnswer) {
             this.userAnswer = answer;
 
+            if (this.isAnswerCorrect(answer)) {
+                this.props.onAnswerIsCorrect();
+            }
+
             this.setState({
                 incorrectItemStyle: {
                     backgroundColor: '#ff0044',
